@@ -1,8 +1,10 @@
 import os
 import zipfile
 from pathlib import Path
-from artifactory_generator.SimpleArtifactoryFinder import SimpleArtifactoryFinder
-from ultimate_patcher.common import EXTRACTED_PATH
+
+from stitch.apk_utils import is_bundle
+from stitch.artifactory_generator.SimpleArtifactoryFinder import SimpleArtifactoryFinder
+from stitch.common import EXTRACTED_PATH, BUNDLE_DIR_PATH, BUNDLE_APK_EXTRACTED_PATH
 
 
 class DexCopier(SimpleArtifactoryFinder):
@@ -17,7 +19,11 @@ class DexCopier(SimpleArtifactoryFinder):
 
     def extract_artifacts(self, artifacts: dict, class_data: str) -> None:
         temp_path = Path(self.args.temp_path)
-        zipfile.ZipFile(self.args.apk_path).extract(
+        apk_path = self.args.apk_path
+        if is_bundle(self.args.apk_path):
+            from stitch.apk_utils import main_apk_name
+            apk_path = temp_path / BUNDLE_APK_EXTRACTED_PATH / main_apk_name
+        zipfile.ZipFile(apk_path).extract(
             'classes.dex',
             temp_path / EXTRACTED_PATH
         )

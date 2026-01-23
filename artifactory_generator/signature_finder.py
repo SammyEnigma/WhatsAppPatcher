@@ -4,8 +4,8 @@ from cryptography.hazmat.primitives import serialization
 
 from cryptography.hazmat.primitives.serialization import pkcs7
 from pathlib import Path
-from artifactory_generator.SimpleArtifactoryFinder import SimpleArtifactoryFinder
-from ultimate_patcher.common import EXTRACTED_PATH
+from stitch.artifactory_generator.SimpleArtifactoryFinder import SimpleArtifactoryFinder
+from stitch.common import EXTRACTED_PATH
 
 
 class SignatureFinder(SimpleArtifactoryFinder):
