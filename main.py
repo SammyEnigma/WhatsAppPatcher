@@ -1,5 +1,9 @@
 import argparse
+from pathlib import Path
+
 from stitch import Stitch
+from stitch.common import ExternalModule
+
 from artifactory_generator.fmessage import FMessage
 from artifactory_generator.dex_copier import DexCopier
 from artifactory_generator.signature_finder import SignatureFinder
@@ -32,7 +36,7 @@ def main():
         temp_path=args.temp_path,
         artifactory_list=artifactory_list,
         google_api_key=args.api_key,
-        external_module='./smali_generator'
+        external_modules=[ExternalModule(Path('./smali_generator'), 'invoke-static {}, Lcom/smali_generator/TheAmazingPatch;->on_load()V')]
     ) as stitch:
         stitch.patch()
 
