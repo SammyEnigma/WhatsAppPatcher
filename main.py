@@ -19,6 +19,7 @@ def get_args():
     parser.add_argument('-g', '--google-api-key', dest='api_key', help='Custom google api key', required=False, default=None)
     parser.add_argument('--artifactory', dest='artifactory', help='Artifactory path', required=False,
                         default='./artifactory.json')
+    parser.add_argument('--no-sign', dest='should_sign', help='Whether to sign the output APK', action='store_false', required=False, default=True)
     return parser.parse_args()
 
 
@@ -36,7 +37,8 @@ def main():
         temp_path=args.temp_path,
         artifactory_list=artifactory_list,
         google_api_key=args.api_key,
-        external_modules=[ExternalModule(Path('./smali_generator'), 'invoke-static {}, Lcom/smali_generator/TheAmazingPatch;->on_load()V')]
+        external_modules=[ExternalModule(Path('./smali_generator'), 'invoke-static {}, Lcom/smali_generator/TheAmazingPatch;->on_load()V')],
+        should_sign=args.should_sign,
     ) as stitch:
         stitch.patch()
 
