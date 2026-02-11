@@ -4,7 +4,7 @@ from pathlib import Path
 
 from stitch.apk_utils import is_bundle
 from stitch.artifactory_generator.SimpleArtifactoryFinder import SimpleArtifactoryFinder
-from stitch.common import EXTRACTED_PATH, BUNDLE_DIR_PATH, BUNDLE_APK_EXTRACTED_PATH
+from stitch.common import EXTRACTED_PATH, BUNDLE_APK_EXTRACTED_PATH
 
 
 class DexCopier(SimpleArtifactoryFinder):

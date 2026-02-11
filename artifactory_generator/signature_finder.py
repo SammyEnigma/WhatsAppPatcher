@@ -19,9 +19,11 @@ class SignatureFinder(SimpleArtifactoryFinder):
         return True
 
     def extract_artifacts(self, artifacts: dict, class_data: str) -> None:
-        signature_file = glob.glob(str(Path(self.args.temp_path) / EXTRACTED_PATH / 'unknown' / 'META-INF' / '*.DSA'))[0]
+        dsa_pattern = str(Path(self.args.temp_path) / EXTRACTED_PATH / 'unknown' / 'META-INF' / '*.DSA')
+        signature_file = glob.glob(dsa_pattern)[0]
         print(f'[+] Found signature file: {signature_file}')
-        with open(signature_file, "rb") as f:            public_key = f.read()
+        with open(signature_file, "rb") as f:
+            public_key = f.read()
         der_cert = pkcs7.load_der_pkcs7_certificates(public_key)[0]
         bytes_signature = der_cert.public_bytes(serialization.Encoding.DER)
         signature = ""
