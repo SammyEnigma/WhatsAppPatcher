@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.smali_generator.patches.ActivityHook;
 import com.smali_generator.patches.DecryptProtobuf;
+import com.smali_generator.patches.FirebaseParams;
 import com.smali_generator.patches.PackageManagerHook;
 import com.smali_generator.patches.ZipFileHook;
 import com.smali_generator.wrappers.FMessage;
@@ -22,6 +23,7 @@ public class TheAmazingPatch {
             new PackageManagerHook(),
             new ZipFileHook(),
             new ActivityHook(),
+            new FirebaseParams(),
     };
 
     static AtomicBoolean is_loaded = new AtomicBoolean(false);

@@ -4,6 +4,7 @@ from pathlib import Path
 from stitch import Stitch
 from stitch.common import ExternalModule
 
+from artifactory_generator.firebase_params import FirebaseParamsFinder
 from artifactory_generator.fmessage import FMessage
 from artifactory_generator.dex_copier import DexCopier
 from artifactory_generator.signature_finder import SignatureFinder
@@ -46,6 +47,7 @@ def main():
         DexCopier(args),
         SignatureFinder(args),
         DecryptProtobufFinder(args),
+        FirebaseParamsFinder(args),
     ]
     with Stitch(
             apk_path=args.apk_path,
